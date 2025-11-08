@@ -28,6 +28,7 @@ export default class ProductDetails {
         const brandName = document.querySelector(".product-detail__brand_name");
         const nameWithoutBrand = document.querySelector(".product-detail__without_brand_name");
         const price = document.querySelector(".product-card__price");
+        const discount = document.querySelector(".product-card__price_discount");
         const color = document.querySelector(".product__color");
         const description = document.querySelector(".product__description");
         const img = document.querySelector(".product-detail__img");
@@ -38,5 +39,10 @@ export default class ProductDetails {
         color.innerHTML = this.product.Colors[0].ColorName;
         description.innerHTML = this.product.DescriptionHtmlSimple;
         img.src = this.product.Image;
+
+        // Get the discount
+        const initialDiscount = Math.fround(this.product.SuggestedRetailPrice - this.product.FinalPrice).toString()
+        const formattedDiscount = `${initialDiscount}`.substring(0, initialDiscount.indexOf(".") + 3)
+        discount.innerHTML = `Discount: ${formattedDiscount}`
     }
 }
