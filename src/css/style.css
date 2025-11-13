@@ -244,6 +244,21 @@ button {
   color: #cc0000;
 }
 
+/* car total */
+.cart-total {
+  margin-top: 1em;
+  padding: 1em;
+  border-top: 2px solid var(--primary-color);
+  text-align: right;
+  font-size: var(--large-font);
+  font-weight: bold;
+}
+
+.cart-total span {
+  color: var(--tertiary-color);
+}
+
+/* RESPONSIV */
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -257,6 +272,10 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 10% 15%;
+  }
+
+  .cart-total {
+    font-size: 1.5em;
   }
 }
 
