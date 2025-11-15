@@ -8,7 +8,11 @@ const dataSource = new ProductData(category)
 const productList = new ProductList(category, dataSource, listElement)
 productList.init()
 
+function renderTitle(){
   const productCategoryTitle = document.getElementById("top-products-category")
   const firstCharacterUpper = category[0].toUpperCase()
   const caseCategory = `${firstCharacterUpper}${category.substring(1, category.length).toLocaleLowerCase()}`
   productCategoryTitle.innerText = `Top Products: ${caseCategory}`
+}
+
+renderTitle()
