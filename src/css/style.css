@@ -119,6 +119,17 @@ button {
   width: 300px;
 }
 
+.checkout_button{
+  width: 300px;
+  border: honeydew;
+}
+
+.checkout_titles{
+    text-align: center;
+    padding: 15px;
+    border: dotted;
+}
+
 .checkout_complete_form{
   padding-top: 1em;
   position: relative;
