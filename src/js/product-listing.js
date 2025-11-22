@@ -1,6 +1,6 @@
-import ProductData from "./ProductData.mjs";
-import ProductList from "./ProductList.mjs";
-import { getParam } from "./utils.mjs";
+import ProductData from "./ProductData.mjs"
+import ProductList from "./ProductList.mjs"
+import { getParam } from "./utils.mjs"
 
 function initialize() {
   const category = getParam("category");
@@ -31,4 +31,4 @@ function renderTitle(category) {
   }
 }
 
-initialize();
+initialize()
