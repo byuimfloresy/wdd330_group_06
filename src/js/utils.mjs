@@ -37,3 +37,22 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   const productsTemplate = list.map(product => templateFn(product))
   parentElement.insertAdjacentHTML(position, productsTemplate.join(''))
 }
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart");
+  const count = cartItems ? cartItems.length : 0;
+  const cartElement = document.querySelector(".cart");
+
+  if (cartElement) {
+    let countElement = cartElement.querySelector(".cart-count");
+
+    if (!countElement) {
+      countElement = document.createElement("span");
+      countElement.classList.add("cart-count");
+      cartElement.appendChild(countElement);
+    }
+
+    countElement.innerText = count;
+    countElement.style.display = count > 0 ? "block" : "none";
+  }
+}
