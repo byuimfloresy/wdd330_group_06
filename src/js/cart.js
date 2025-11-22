@@ -49,6 +49,7 @@ function removeItemFromCart(event) {
 
   localStorage.setItem("so-cart", JSON.stringify(updatedCart));
   renderCartContents();
+  updateCartCount();
 }
 
 // Update cart total in the footer
@@ -71,3 +72,4 @@ function updateCartTotal(cartItems) {
 
 // Initial render
 renderCartContents();
+updateCartCount();

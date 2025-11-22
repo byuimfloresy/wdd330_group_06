@@ -115,6 +115,20 @@ button {
   text-align: center;
 }
 
+.checkout_cart{
+  width: 300px;
+}
+
+.checkout_complete_form{
+  padding-top: 1em;
+  position: relative;
+  text-align: center;
+}
+
+.checkout_cart{
+  width: 300px;
+}
+
 .cart svg {
   width: 25px;
 }
@@ -288,4 +302,21 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.cart {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--tertiary-color);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  z-index: 10;
 }

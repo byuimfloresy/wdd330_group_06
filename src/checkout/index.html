@@ -8,22 +8,23 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkout.js" type="module" defer></script>
   </head>
 
   <body>
     <header class="divider">
       <div class="logo">
-        <img src="images/noun_Tent_2517.svg" alt="tent image for logo" />
+        <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
 
-        <a href="index.html">
+        <a href="/index.html">
           Sleep
           <span class="highlight">Outside</span>
         </a>
       </div>
 
       <div class="cart">
-        <a href="cart/">
+        <a href="/cart/" class="checkout_cart">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <path
               d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6 3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3 2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2 2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7 -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0C15.6 6.2 14.9 23.6 18.9 32.6z"
@@ -59,6 +60,69 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form action="/checkout/result.html" method="post" class="checkout_complete_form">
+          <div class="">
+            <label>Cart:</label>
+          </div>
+          <div class="">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="checkout_first_name" required/>
+          </div>
+          <div class="">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="checkout_last_name" required/>
+          </div>
+          <div class="">
+            <label for="street_address">Street Address</label>
+            <input type="text" name="street_address" id="checkout_street_address" required/>
+          </div>
+          <div class="">
+            <label for="city">City</label>
+            <input type="text" name="city" id="checkout_city" required/>
+          </div>
+          <div class="">
+            <label for="state">State</label>
+            <input type="text" name="state" id="checkout_state" required/>
+          </div>
+          <div class="">
+            <label for="zip_code">Zip Code</label>
+            <input type="text" name="zip_code" id="checkout_zip_code" required/>
+          </div>
+          <div class="">
+            <label for="credit_card">Credit Card</label>
+            <input type="text" name="credit_card" id="checkout_credit_card" required/>
+          </div>
+          <div class="">
+            <label for="expiration_date">Expiration Date</label>
+            <input type="text" name="expiration_date" id="checkout_expiration_date" required/>
+          </div>
+          <div class="">
+            <label for="security_code">Security Code</label>
+            <input type="text" name="security_code" id="checkout_security_code" required/>
+          </div>
+
+          <div class="">
+            <label>Order Summary:</label>
+          </div>
+          <div class="">
+            <label for="subtotal">Subtotal</label>
+            <input type="text" name="subtotal" id="checkout_subtotal" disabled/> <!-- The item subtotal amount will come from the items in the cart. -->
+          </div>
+          <div class="">
+            <label for="tax">Tax</label>
+            <input type="text" name="tax" id="checkout_tax" disabled/> <!-- Tax: Use 6% sales tax on the subtotal amount -->
+          </div>
+          <div class="">
+            <label for="shipping_estimate">Shipping Estimate</label>
+            <input type="text" name="shipping_estimate" id="checkout_shipping_estimate" disabled/> <!-- Use $10 for the first item plus $2 for each additional item after that -->
+          </div>
+          <div class="">
+            <label for="order_total">Order Total</label>
+            <input type="text" name="order_total" id="checkout_order_total" disabled/> <!-- Subtotal +  Add tax and then shipping costs. -->
+          </div>
+
+          <input type="submit" id="checkout_form_submit_btn" value="Checkout"/>
+        </form>
       </section>
     </main>
 

@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, updateCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -22,6 +22,7 @@ export default class ProductDetails {
         const localStorage = getLocalStorage("so-cart") || [];
         localStorage.push(this.product)
         setLocalStorage("so-cart", localStorage);
+        updateCartCount();
     }
 
     async renderProductDetails() {
@@ -44,5 +45,6 @@ export default class ProductDetails {
         const initialDiscount = Math.fround(this.product.SuggestedRetailPrice - this.product.FinalPrice).toString()
         const formattedDiscount = `${initialDiscount}`.substring(0, initialDiscount.indexOf(".") + 3)
         discount.innerHTML = `Discount: ${formattedDiscount}`
+        
     }
 }
