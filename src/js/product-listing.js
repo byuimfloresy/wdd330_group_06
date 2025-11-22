@@ -5,7 +5,7 @@ import { getParam } from "./utils.mjs"
 function initialize() {
   const category = getParam("category");
   const listElement = document.querySelector(".product-list");
-  const dataSource = new ProductData(category);
+  const dataSource = new ExternalServices(category);
   
   const productList = new ProductList(category, dataSource, listElement);
   productList.init();
