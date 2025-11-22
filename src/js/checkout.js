@@ -1,3 +1,4 @@
 import CheckoutProcess from "./CheckoutProcess.mjs"
 
-CheckoutProcess()
+const process = new CheckoutProcess()
+process.init()

@@ -115,6 +115,20 @@ button {
   text-align: center;
 }
 
+.checkout_cart{
+  width: 300px;
+}
+
+.checkout_complete_form{
+  padding-top: 1em;
+  position: relative;
+  text-align: center;
+}
+
+.checkout_cart{
+  width: 300px;
+}
+
 .cart svg {
   width: 25px;
 }
