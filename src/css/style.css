@@ -331,3 +331,35 @@ footer {
   border-radius: 50%;
   z-index: 10;
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.search-bar input {
+  padding: 0.5rem;
+  border: 1px solid var(--light-grey);
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  height: 40px; 
+}
+
+.search-bar button {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 0;
+  width: 40px; 
+  height: 40px;
+  border-radius: 0 4px 4px 0;
+  
+  font-size: 1rem; 
+}
+
+.search-bar button:hover {
+  background-color: var(--tertiary-color);
+}

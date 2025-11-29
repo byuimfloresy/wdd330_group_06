@@ -27,8 +27,31 @@ export default class ProductList {
     }
 
     async init() {
-        const list = await this.dataSource.getData(this.category);
-        this.products = list;
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get("q");
+
+        if (query) {
+            // GLOBAL SEARCH: Fetch data from ALL categories
+            const categories = ["tents", "backpacks", "sleeping-bags", "hammocks"];
+            
+            // Trigger 4 requests at the same time
+            const requests = categories.map((cat) => this.dataSource.getData(cat));
+            
+            // Wait for all of them to finish
+            const results = await Promise.all(requests);
+            
+            // Combine the 4 arrays into one single list (flatten)
+            this.products = results.flat();
+
+            // Filter the big list
+            this.products = this.products.filter((product) => 
+                product.Name.toLowerCase().includes(query.toLowerCase())
+            );
+
+        } else {
+            // NORMAL MODE: Just fetch the current category
+            this.products = await this.dataSource.getData(this.category);
+        }
         
         this.renderList(this.products);
     }
@@ -46,9 +69,7 @@ export default class ProductList {
     }
 
     renderList(productList) {
-
         this.listElement.innerHTML = ""; 
-        
         renderListWithTemplate(productCardTemplate, this.listElement, productList, "afterbegin", false);
     }
 }

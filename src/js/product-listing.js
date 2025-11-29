@@ -20,6 +20,20 @@ function initialize() {
       productList.sortList(sortValue);
     });
   }
+
+  const searchBtn = document.querySelector("#searchBtn");
+  if (searchBtn) {
+    searchBtn.addEventListener("click", handleSearch);
+  }
+
+  const searchInput = document.querySelector("#searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    });
+  }
 }
 
 function renderTitle(category) {
@@ -28,6 +42,14 @@ function renderTitle(category) {
       const firstCharacterUpper = category[0].toUpperCase();
       const caseCategory = `${firstCharacterUpper}${category.substring(1).toLowerCase()}`;
       productCategoryTitle.innerText = `Top Products: ${caseCategory}`;
+  }
+}
+
+function handleSearch() {
+  const query = document.querySelector("#searchInput").value;
+  const category = getParam("category");
+  if (query) {
+    window.location.href = `/product_listing/index.html?category=${category}&q=${encodeURIComponent(query)}`;
   }
 }
 
