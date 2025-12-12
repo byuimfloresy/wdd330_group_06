@@ -18,8 +18,7 @@
         <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
 
         <a href="/index.html">
-          Sleep
-          <span class="highlight">Outside</span>
+          Sleep<span class="highlight">Outside</span>
         </a>
       </div>
 
@@ -59,11 +58,8 @@
 
     <main class="divider">
       <section class="products">
-        <h2>Review & Place your Order</h2>
-        <form action="/checkout/result.html" method="post" class="checkout_complete_form">
-          <div class="">
-            <label>Cart:</label>
-          </div>
+        <h2 class="checkout_titles">Review & Place your Order</h2>
+        <form name="checkout_form" action="/checkout/success.html" method="post" class="checkout_complete_form" id="checkout_form_information">
           <div class="">
             <label for="first_name">First Name</label>
             <input type="text" name="first_name" id="checkout_first_name" required/>
@@ -101,9 +97,7 @@
             <input type="text" name="security_code" id="checkout_security_code" required/>
           </div>
 
-          <div class="">
-            <label>Order Summary:</label>
-          </div>
+          <h2 class="checkout_titles">Order Summary</h2>
           <div class="">
             <label for="subtotal">Subtotal</label>
             <input type="text" name="subtotal" id="checkout_subtotal" disabled/> <!-- The item subtotal amount will come from the items in the cart. -->
@@ -121,7 +115,7 @@
             <input type="text" name="order_total" id="checkout_order_total" disabled/> <!-- Subtotal +  Add tax and then shipping costs. -->
           </div>
 
-          <input type="submit" id="checkout_form_submit_btn" value="Checkout"/>
+          <input class="checkout_button" type="submit" id="checkout_form_submit_btn" value="Checkout"/>
         </form>
       </section>
     </main>

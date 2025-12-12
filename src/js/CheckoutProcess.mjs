@@ -1,10 +1,11 @@
 import { getLocalStorage } from "./utils.mjs";
-const baseURL = import.meta.env.VITE_SERVER_URL
+import ExternalServices from "./ExternalServices.mjs"
 
 export default class CheckoutProcess{
     constructor() {
         this.cartItems = getLocalStorage("so-cart") || []
         this.subtotal = 0
+        this.service = new ExternalServices()
     }
 
     init(){
@@ -13,7 +14,7 @@ export default class CheckoutProcess{
             .addEventListener('keypress', this.totalCalculation.bind(this));
 
         document.getElementById('checkout_form_submit_btn')
-            .addEventListener('click', this.checkout.bind(this));
+             .addEventListener('click',this.checkout.bind(this))
     }
 
     subtotalCalculation(){
@@ -40,26 +41,8 @@ export default class CheckoutProcess{
         orderTotalElement.value =  `${(this.subtotal  + tax + shippingEstimate).toFixed(2)}`
     }
 
-    // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
-    packageItems(items) {
-      // convert the list of products from localStorage to the simpler form required for the checkout process.
-      // An Array.map would be perfect for this process.
-
-    }
-
-    async checkout(e) {
-        e.preventDefault()
-        // get the form element data by the form name
-        // convert the form data to a JSON order object using the formDataToJSON function
-        // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
-        // call the checkout method in the ExternalServices module and send it the JSON order data.
-
-        // packageItems()
-        //await this.dataSource.getData(this.category)
-
-
-
-        const request = { 
+    packageItems() {
+             const request = { 
              "orderDate": new Date().toISOString(),
               "fname": document.getElementById("checkout_first_name").value,
               "lname": document.getElementById("checkout_last_name").value,
@@ -76,17 +59,11 @@ export default class CheckoutProcess{
               "tax": document.getElementById("checkout_tax").value
             }
             this.cartItems.forEach(x => {
-                let counter = 0
-                this.cartItems.forEach(y => {
-                    if(x.Id == y.Id){
-                        counter++
-                    }
-                })
                 const item = {
                 "id": x.Id,
                 "name": x.Name,
                 "price": x.ListPrice,
-                "quantity": counter
+                "quantity": x.qty
               }
               request.items.push(item)
             })
@@ -94,15 +71,24 @@ export default class CheckoutProcess{
             console.log("Sending data")
             console.log(request.items[0])
             console.log("Data Sent")
+        return request
+    }
 
-
-            const options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(request)}
-            const response = await fetch(`${baseURL}/checkout`, options)
-            console.log(response)
+    async checkout() {
+        const isFormValid = document.forms.checkout_form.checkValidity()
+        if (!isFormValid){
+            console.log("Form not valid")
+            return
+        }
+        const request = this.packageItems()
+        console.log("Request object: ")
+        console.log(request)
+        
+        try{
+            this.service.checkout(request)
+        }catch (err){
+            console.log("Error sending request")
+            console.log(err)
+        }  
     }
 }

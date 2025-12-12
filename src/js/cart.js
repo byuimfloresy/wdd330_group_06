@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, updateCartCount } from "./utils.mjs";
 
 // Render cart items in the DOM
 function renderCartContents() {
@@ -26,7 +26,7 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__quantity">${item.qty}/p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
     
     <button 
@@ -65,7 +65,11 @@ function updateCartTotal(cartItems) {
   }
 
   // Calculate total price
-  const total = cartItems.reduce((sum, item) => sum + Number(item.FinalPrice), 0);
+  let total = 0
+  cartItems.map(product => {
+    total += (product.FinalPrice * product.qty)
+  })
+  
   cartTotalEl.textContent = `Total: $${total.toFixed(2)}`;
   cartFooter.classList.remove("hide");
 }

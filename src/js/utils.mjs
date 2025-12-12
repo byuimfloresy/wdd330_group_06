@@ -38,6 +38,38 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   parentElement.insertAdjacentHTML(position, productsTemplate.join(''))
 }
 
+export function addUniqueProductsToCart(uniqueProduct){
+        // Get local storage
+        let localStorage = getLocalStorage("so-cart") || [];
+        console.log("running loop")
+        if (localStorage.length < 1){
+          uniqueProduct.qty = 1
+          setLocalStorage("so-cart", [uniqueProduct]);
+          return
+        }
+        
+        let productFound = false
+        localStorage = localStorage.map(product => {
+            if (uniqueProduct.Id == product.Id){
+              productFound = true
+                product.qty += 1
+            }
+            console.log("Final product")
+            console.log(product)
+            return product
+        })
+
+        if(productFound){
+          setLocalStorage("so-cart", localStorage);
+        }else{
+          uniqueProduct.qty = 1
+          localStorage.push(uniqueProduct)
+          setLocalStorage("so-cart", localStorage);
+        }
+        
+        
+    }
+
 export function updateCartCount() {
   const cartItems = getLocalStorage("so-cart");
   const count = cartItems ? cartItems.length : 0;
@@ -55,4 +87,8 @@ export function updateCartCount() {
     countElement.innerText = count;
     countElement.style.display = count > 0 ? "block" : "none";
   }
+}
+
+export function alertMessage(message, scroll=true){
+  document.querySelector("main")
 }
